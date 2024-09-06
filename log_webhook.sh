@@ -1,5 +1,7 @@
 #!/bin/bash
-webhook_url="https://discord.com/api/webhooks/1281607387366817852/Jvcv8EAiB6ufGgPOTCLdp-aFc7PXXpodGxn-REW3xR-Z3BpQ3q2pw_yEZlQiJDGDQ4kG"
+
+# get env vars
+source .env
 
 # Function to send a webhook when a player joins
 send_webhook() {
