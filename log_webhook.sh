@@ -35,7 +35,7 @@ tail -F -n 1 /home/intrudir/.minecraft/logs/latest.log | while read line; do
         send_webhook "leave" "$log_time" "$player"
         sleep 1
 
-    elif [[ "$line" == *"<"* && "$line" == *">"* ]]; then
+    elif [[ "$line" == *"MinecraftServer"* && "$line" == *"<"* && "$line" == *">"* ]]; then
         log_time=$(echo $line | awk '{print $2}' | tr -d ']')
         player=$(echo $line | awk '{print $6}')
         msg=$(echo $line | awk -F'[<>]' '{print $3}' | cut -d':' -f2-)
