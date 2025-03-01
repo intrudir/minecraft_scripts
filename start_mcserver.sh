@@ -13,7 +13,11 @@ tmux send-keys -t mc.1 "htop" C-m
 sleep 5
 
 # Pane 0: Start the Minecraft server
-tmux send-keys -t mc.0 "cd /home/intrudir/.minecraft && /home/intrudir/.minecraft/start.sh" C-m
+# CurseForge/BMC
+#tmux send-keys -t mc.0 "cd /home/intrudir/.minecraft && /home/intrudir/.minecraft/start.sh" C-m
+
+# All the Mods / NeoForge
+tmux send-keys -t mc.0 "cd /home/intrudir/ServerFiles-2.36 && /home/intrudir/ServerFiles-2.36/startserver.sh" C-m
 sleep 5
 
 # Create a new window (tab) for monitoring the logs

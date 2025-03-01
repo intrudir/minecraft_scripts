@@ -19,7 +19,8 @@ send_webhook() {
 }
 
 # Monitor the server log for player connections in the background
-tail -F -n 1 /home/intrudir/.minecraft/logs/latest.log | while read line; do
+#tail -F -n 1 /home/intrudir/.minecraft/logs/latest.log | while read line; do
+tail -F -n 1 "/home/intrudir/ServerFiles-2.36/logs/latest.log" | while read line; do
     if [[ "$line" == *"joined the game"* ]]; then
         log_time=$(echo $line | awk '{print $2}' | tr -d ']')
         player=$(echo $line | awk '{print $6}')
@@ -45,6 +46,12 @@ tail -F -n 1 /home/intrudir/.minecraft/logs/latest.log | while read line; do
             send_webhook "chat" "$log_time" "$player" "$msg"
             sleep 1
         fi
+
+    elif [[ "$line" == *"MinecraftServer"* && "$line" == *"was shot by"* || "$line" == *"was slain by"* ]]; then
+        log_time=$(echo $line | awk '{print $2}' | tr -d ']')
+        player=$(echo $line | awk '{print $6}')
+        msg=$(echo $line)
+
     fi
 
 done
